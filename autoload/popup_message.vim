@@ -1,45 +1,18 @@
 hi messagePopup guibg=#07343b
 
-if exists("g:loaded_popup_message")
-  finish
-endif
-let g:loaded_popup_message = 1
+function! s:focus_main_window()
+  execute '0windo :'
+endfunction
 
-" function! s:get_command_result(cmd) abort
-"   let [verbose, verbosefile] = [&verbose, &verbosefile]
-"   set verbose=0 verbosefile=
-"   redir => str
-"     execute 'silent!' a:cmd
-"   redir END
-"   let [&verbose, &verbosefile] = [verbose, verbosefile]
-"   return str
-" endfunction
-"
-" " =============================================
-" " :messagesの最後の行を取得する
-" " =============================================
-" function! s:get_last_message() abort
-"   let lines = filter(split(s:get_command_result('messages'), "\n"), 'v:val !=# ""')
-"   if len(lines) <= 0
-"       return ''
-"   end
-"   return lines[len(lines) - 1 :][0]
-" endfunction
-"
-" function! s:focus_main_window()
-"   execute '0windo :'
-" endfunction
-"
-" function! s:close_popup_message()
-"   if exists('g:win_id')
-"     call nvim_win_close(g:win_id, v:true)
-"     unlet g:win_id
-"     augroup my_function
-"       autocmd!
-"     augroup END
-"   endif
-" endfunction
-
+function! s:close_popup_message()
+  if exists('g:win_id')
+    call nvim_win_close(g:win_id, v:true)
+    unlet g:win_id
+    augroup popup_message
+      autocmd!
+    augroup END
+  endif
+endfunction
 function! popup_message#open(message)
   let message = a:message
   if message == ''
@@ -80,10 +53,8 @@ function! popup_message#open(message)
 
   call s:focus_main_window()
 
-  augroup my_function
+  augroup popup_message
     autocmd!
     autocmd CursorMoved,CursorMovedI,InsertEnter <buffer> call s:close_popup_message()
   augroup END
 endfunction
-
-" call popup_message#open(s:get_last_message())

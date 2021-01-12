@@ -22,8 +22,8 @@ function! popup_message#open(message)
   let pos = win_screenpos('.')
   let opened_at = [pos[0] + winline() - 1, pos[1] + wincol() - 2]
   let message_len = strlen(message)
-  let MAX_WIDTH = 70
-  let height =  message_len / MAX_WIDTH + 1
+  let width = get(g:, 'popup_message_width', 70)
+  let height =  message_len / width + 1
 
   let row = opened_at[0]
   let col = opened_at[1]
@@ -39,7 +39,7 @@ function! popup_message#open(message)
       \'relative': 'editor',
       \ 'row': row,
       \ 'col': col,
-      \ 'width': message_len > MAX_WIDTH ? MAX_WIDTH : message_len,
+      \ 'width': message_len > width ? width : message_len,
       \ 'height': height,
       \ 'anchor': vert . 'W',
       \ 'style': 'minimal',

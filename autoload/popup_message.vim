@@ -8,9 +8,11 @@ function! s:close_popup_message()
   if exists('g:win_id')
     call nvim_win_close(g:win_id, v:true)
     unlet g:win_id
+    augroup popup_message
+      autocmd!
+    augroup END
   endif
 endfunction
-
 function! popup_message#open(message)
   let message = a:message
   if message == ''

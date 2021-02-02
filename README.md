@@ -1,7 +1,7 @@
-vim-popup-message
+nvim-popup-message
 ====
 
-This vim plugin can can displaying a message in the floating window.
+This neovim plugin can displaying a message in the floating window.
 
 ## Demo
 
@@ -10,11 +10,11 @@ This demo shows displaying the last message in the floating window.
 
 ## Requirement
 
-- NeoVim >= 0.4
+- Neovim >= 0.4
 
 ## Install
 ```vim
-Plug 'Rasukarusan/vim-popup-message'
+Plug 'Rasukarusan/nvim-popup-message'
 ```
 
 ## Usage

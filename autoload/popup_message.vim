@@ -1,5 +1,3 @@
-hi messagePopup guibg=#07343b
-
 function! s:focus_main_window()
   execute '0windo :'
 endfunction
@@ -47,7 +45,6 @@ function! popup_message#open(message)
 
   let buf = nvim_create_buf(v:false, v:true)
   let g:win_id = nvim_open_win(buf, v:true, config)
-  setlocal winhighlight=Normal:messagePopup
   call setline(1, message)
   setlocal nomodified nomodifiable
 
